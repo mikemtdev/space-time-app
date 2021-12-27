@@ -33,7 +33,7 @@ const UpcomingLaunches = () => {
     return <Text>Error! {error.message}</Text>;
   }
   const { launchesUpcoming } = data;
-  console.log('App:This is for ==> data:', data);
+  // console.log('App:This is for ==> data:', data);
   // return data.launchesUpcoming.map((launch, index) => (
   //   <Box key={index} shadow={8} py={3} mx={3}>
   //     <Text fontSize='md' bold mb={1}>
@@ -53,7 +53,13 @@ const UpcomingLaunches = () => {
           mission_patch,
         },
       }) => (
-        <Box shadow={8} py={3} mx={3}>
+        <Box
+          shadow={0}
+          borderWidth={0}
+          px={4}
+          py={2}
+          my={2}
+          mx={3}>
           <Image
             w={100}
             h={100}

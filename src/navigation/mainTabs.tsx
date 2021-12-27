@@ -21,7 +21,10 @@ const TabIcon = (Props: {
 
 export const MainTabs = () => {
   return (
-    <Tab.Navigator screenOptions={{}}>
+    <Tab.Navigator
+      screenOptions={{
+        headerShadowVisible: false,
+      }}>
       <Tab.Screen
         name='UpcomingLaunch'
         component={UpcomingLaunch}
