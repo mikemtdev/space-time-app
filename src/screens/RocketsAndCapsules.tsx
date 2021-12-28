@@ -1,6 +1,14 @@
 import { useQuery, gql } from '@apollo/client';
-import { Box, FlatList, Image, Text } from 'native-base';
+import {
+  Box,
+  FlatList,
+  Image,
+  Spinner,
+  Text,
+} from 'native-base';
 import React from 'react';
+import { LayoutContainer } from '../components/LayoutContainer';
+import { Loader } from '../components/Loader';
 const CAPSULES = gql`
   query {
     capsules(find: {}) {
@@ -32,7 +40,7 @@ const CAPSULES = gql`
 const RocketsAndCapsulesComponent = () => {
   const { loading, error, data } = useQuery(CAPSULES);
   if (loading) {
-    return <Text>Checking prelaunch systems</Text>;
+    return <Loader />;
   }
   if (error) {
     return <Text>error {error.message}</Text>;
@@ -84,8 +92,8 @@ const RocketsAndCapsulesComponent = () => {
 
 export const RocketsAndCapsules = () => {
   return (
-    <Box bgColor='white'>
+    <LayoutContainer>
       <RocketsAndCapsulesComponent />{' '}
-    </Box>
+    </LayoutContainer>
   );
 };

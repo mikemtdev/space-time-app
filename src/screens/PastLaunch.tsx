@@ -1,6 +1,8 @@
 import { useQuery, gql } from '@apollo/client';
 import { Box, FlatList, Image, Text } from 'native-base';
 import React from 'react';
+import { LayoutContainer } from '../components/LayoutContainer';
+import { Loader } from '../components/Loader';
 
 const LAUNCHED_QUERY = gql`
   query {
@@ -25,7 +27,7 @@ const LaunchedComponent = () => {
   const { loading, error, data } = useQuery(LAUNCHED_QUERY);
 
   if (loading) {
-    return <Text>Checking prelaunch systems</Text>;
+    return <Loader />;
   }
   if (error) {
     return <Text>Error! {error.message}</Text>;
@@ -73,8 +75,8 @@ const LaunchedComponent = () => {
 
 export const Launched = () => {
   return (
-    <Box bgColor='white'>
+    <LayoutContainer>
       <LaunchedComponent />
-    </Box>
+    </LayoutContainer>
   );
 };

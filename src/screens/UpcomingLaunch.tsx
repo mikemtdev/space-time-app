@@ -1,6 +1,16 @@
 import { useQuery, gql } from '@apollo/client';
-import { Box, FlatList, Image, Text } from 'native-base';
+import {
+  Box,
+  Center,
+  FlatList,
+  Image,
+  Skeleton,
+  Spinner,
+  Text,
+} from 'native-base';
 import React from 'react';
+import { LayoutContainer } from '../components/LayoutContainer';
+import { Loader } from '../components/Loader';
 
 const UPCOMING_LAUNCHES = gql`
   query {
@@ -27,7 +37,7 @@ const UpcomingLaunches = () => {
     UPCOMING_LAUNCHES
   );
   if (loading) {
-    return <Text>Checking prelaunch systems</Text>;
+    return <Loader />;
   }
   if (error) {
     return <Text>Error! {error.message}</Text>;
@@ -79,8 +89,8 @@ const UpcomingLaunches = () => {
 };
 export const UpcomingLaunch = () => {
   return (
-    <Box bgColor='white' flex='1'>
+    <LayoutContainer>
       <UpcomingLaunches />
-    </Box>
+    </LayoutContainer>
   );
 };
