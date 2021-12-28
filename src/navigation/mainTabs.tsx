@@ -6,7 +6,7 @@ import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
 import { Launched } from '../screens/PastLaunch';
 import { RocketsAndCapsules } from '../screens/RocketsAndCapsules';
-import { UpcomingLaunch } from '../screens/UpcomingLaunch';
+import { UpcomingLaunchesStack } from './UpcomingLaunches';
 
 const Tab = createBottomTabNavigator();
 
@@ -26,9 +26,10 @@ export const MainTabs = () => {
         headerShadowVisible: false,
       }}>
       <Tab.Screen
-        name='UpcomingLaunch'
-        component={UpcomingLaunch}
+        name='UpcomingLaunchesStack'
+        component={UpcomingLaunchesStack}
         options={{
+          headerShown: false,
           tabBarLabel: 'Upcoming Launch',
           headerTitle: 'Launch Upcoming',
           tabBarIcon: ({}) => (

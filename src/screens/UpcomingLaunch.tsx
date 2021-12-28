@@ -1,16 +1,23 @@
 import { useQuery, gql } from '@apollo/client';
+import { useNavigation } from '@react-navigation/core';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import {
   Box,
   Center,
   FlatList,
   Image,
+  Pressable,
   Skeleton,
   Spinner,
+  Stack,
   Text,
 } from 'native-base';
 import React from 'react';
-import { LayoutContainer } from '../components/LayoutContainer';
+import { ErrorMessage } from '../components/Errors/ErrorMessage';
+import { NetworkError } from '../components/Errors/NetworkError';
 import { Loader } from '../components/Loader';
+import { LayoutContainer } from '../components/LayoutContainer';
+import { LaunchDetails } from './LaunchDetails';
 
 const UPCOMING_LAUNCHES = gql`
   query {
@@ -33,6 +40,7 @@ const UPCOMING_LAUNCHES = gql`
 `;
 
 const UpcomingLaunches = () => {
+  const navigation = useNavigation();
   const { loading, error, data } = useQuery(
     UPCOMING_LAUNCHES
   );
@@ -40,10 +48,13 @@ const UpcomingLaunches = () => {
     return <Loader />;
   }
   if (error) {
-    return <Text>Error! {error.message}</Text>;
+    if (error.networkError) {
+      return <NetworkError />;
+    }
+    return <ErrorMessage error={error} />;
   }
   const { launchesUpcoming } = data;
-  // console.log('App:This is for ==> data:', data);
+  console.log('App:This is for ==> data:', data);
   // return data.launchesUpcoming.map((launch, index) => (
   //   <Box key={index} shadow={8} py={3} mx={3}>
   //     <Text fontSize='md' bold mb={1}>
@@ -57,19 +68,27 @@ const UpcomingLaunches = () => {
       data={launchesUpcoming}
       renderItem={({
         item: {
+          id,
           rocket: { rocket_name },
           launch_site: { site_name_long },
           mission_name,
+          mission_id,
           mission_patch,
         },
       }) => (
-        <Box
+        <Pressable
           shadow={0}
           borderWidth={0}
           px={4}
           py={2}
           my={2}
-          mx={3}>
+          mx={3}
+          onPress={() =>
+            navigation.navigate('LaunchDetails', {
+              id,
+              mission_id,
+            })
+          }>
           <Image
             w={100}
             h={100}
@@ -81,12 +100,13 @@ const UpcomingLaunches = () => {
           </Text>
           <Text>{site_name_long}</Text>
           <Text>{mission_name}</Text>
-        </Box>
+        </Pressable>
       )}
       keyExtractor={(item) => item.id}
     />
   );
 };
+
 export const UpcomingLaunch = () => {
   return (
     <LayoutContainer>

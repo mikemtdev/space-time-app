@@ -7,8 +7,10 @@ import {
   Text,
 } from 'native-base';
 import React from 'react';
+import { ErrorMessage } from '../components/Errors/ErrorMessage';
 import { LayoutContainer } from '../components/LayoutContainer';
 import { Loader } from '../components/Loader';
+import { NetworkError } from '../components/Errors/NetworkError';
 const CAPSULES = gql`
   query {
     capsules(find: {}) {
@@ -43,13 +45,16 @@ const RocketsAndCapsulesComponent = () => {
     return <Loader />;
   }
   if (error) {
-    return <Text>error {error.message}</Text>;
+    if (error.networkError) {
+      return <NetworkError />;
+    }
+    return <ErrorMessage error={error} />;
   }
   const { capsules, rockets } = data;
-  console.log(
-    'RocketsAndCapsules:This is for ==> data:',
-    data
-  );
+  // console.log(
+  //   'RocketsAndCapsules:This is for ==> data:',
+  //   data
+  // );
   return (
     <FlatList
       data={capsules}

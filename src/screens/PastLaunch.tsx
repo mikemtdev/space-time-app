@@ -1,6 +1,8 @@
 import { useQuery, gql } from '@apollo/client';
 import { Box, FlatList, Image, Text } from 'native-base';
 import React from 'react';
+import { ErrorMessage } from '../components/Errors/ErrorMessage';
+import { NetworkError } from '../components/Errors/NetworkError';
 import { LayoutContainer } from '../components/LayoutContainer';
 import { Loader } from '../components/Loader';
 
@@ -30,13 +32,16 @@ const LaunchedComponent = () => {
     return <Loader />;
   }
   if (error) {
-    return <Text>Error! {error.message}</Text>;
+    if (error.networkError) {
+      return <NetworkError />;
+    }
+    return <ErrorMessage error={error} />;
   }
   const { launchesPast } = data;
-  console.log(
-    'PastLaunch:This is for ==> data:',
-    launchesPast
-  );
+  // console.log(
+  //   'PastLaunch:This is for ==> data:',
+  //   launchesPast
+  // );
   return (
     <FlatList
       data={launchesPast}
