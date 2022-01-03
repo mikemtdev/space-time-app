@@ -13,10 +13,10 @@ import {
   Text,
 } from 'native-base';
 import React from 'react';
-import { ErrorMessage } from '../components/Errors/ErrorMessage';
-import { NetworkError } from '../components/Errors/NetworkError';
-import { Loader } from '../components/Loader';
-import { LayoutContainer } from '../components/LayoutContainer';
+import { ErrorMessage } from '../../components/Errors/ErrorMessage';
+import { NetworkError } from '../../components/Errors/NetworkError';
+import { Loader } from '../../components/Loader';
+import { LayoutContainer } from '../../components/LayoutContainer';
 import { LaunchDetails } from './LaunchDetails';
 
 const UPCOMING_LAUNCHES = gql`

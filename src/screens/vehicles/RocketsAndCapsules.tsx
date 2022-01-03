@@ -7,10 +7,10 @@ import {
   Text,
 } from 'native-base';
 import React from 'react';
-import { ErrorMessage } from '../components/Errors/ErrorMessage';
-import { LayoutContainer } from '../components/LayoutContainer';
-import { Loader } from '../components/Loader';
-import { NetworkError } from '../components/Errors/NetworkError';
+import { ErrorMessage } from '../../components/Errors/ErrorMessage';
+import { LayoutContainer } from '../../components/LayoutContainer';
+import { Loader } from '../../components/Loader';
+import { NetworkError } from '../../components/Errors/NetworkError';
 const CAPSULES = gql`
   query {
     capsules(find: {}) {

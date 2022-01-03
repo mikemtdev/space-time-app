@@ -1,15 +1,17 @@
 import { useQuery, gql } from '@apollo/client';
 import { Box, FlatList, Image, Text } from 'native-base';
 import React from 'react';
-import { ErrorMessage } from '../components/Errors/ErrorMessage';
-import { NetworkError } from '../components/Errors/NetworkError';
-import { LayoutContainer } from '../components/LayoutContainer';
-import { Loader } from '../components/Loader';
+import { LaunchedCard } from '../../components/cards/Launched';
+import { ErrorMessage } from '../../components/Errors/ErrorMessage';
+import { NetworkError } from '../../components/Errors/NetworkError';
+import { LayoutContainer } from '../../components/LayoutContainer';
+import { Loader } from '../../components/Loader';
 
 const LAUNCHED_QUERY = gql`
   query {
     launchesPast(limit: 20) {
       id
+      mission_id
       launch_date_local
       launch_site {
         site_name_long
@@ -25,6 +27,7 @@ const LAUNCHED_QUERY = gql`
     }
   }
 `;
+
 const LaunchedComponent = () => {
   const { loading, error, data } = useQuery(LAUNCHED_QUERY);
 
@@ -47,31 +50,22 @@ const LaunchedComponent = () => {
       data={launchesPast}
       renderItem={({
         item: {
+          id,
+          mission_id,
           rocket: { rocket_name },
           launch_site: { site_name_long },
           mission_name,
           mission_patch,
         },
       }) => (
-        <Box
-          shadow={0}
-          borderWidth={0}
-          px={4}
-          py={2}
-          my={2}
-          mx={3}>
-          <Image
-            w={100}
-            h={100}
-            source={{ uri: mission_patch }}
-            alt={rocket_name}
-          />
-          <Text fontSize='md' bold mb={1}>
-            {rocket_name}
-          </Text>
-          <Text>{site_name_long}</Text>
-          <Text>{mission_name}</Text>
-        </Box>
+        <LaunchedCard
+          id={id}
+          mission_id={mission_id}
+          rocket_name={rocket_name}
+          site_name_long={site_name_long}
+          mission_name={mission_name}
+          mission_patch={mission_patch}
+        />
       )}
       keyExtractor={(item) => item.id}
     />

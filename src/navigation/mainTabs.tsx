@@ -4,8 +4,9 @@ import {
 } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
-import { Launched } from '../screens/PastLaunch';
-import { RocketsAndCapsules } from '../screens/RocketsAndCapsules';
+import { Launched } from '../screens/launched/PastLaunch';
+import { RocketsAndCapsules } from '../screens/vehicles/RocketsAndCapsules';
+import { LaunchedNavigation } from './LaunchedNavigation';
 import { UpcomingLaunchesStack } from './UpcomingLaunches';
 
 const Tab = createBottomTabNavigator();
@@ -39,8 +40,9 @@ export const MainTabs = () => {
       />
       <Tab.Screen
         name='Launched'
-        component={Launched}
+        component={LaunchedNavigation}
         options={{
+          headerShown: false,
           tabBarIcon: ({}) => <TabIcon name='orbit' />,
         }}
       />

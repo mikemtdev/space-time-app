@@ -1,9 +1,9 @@
 import { useQuery, gql } from '@apollo/client';
 import React from 'react';
-import { LayoutContainer } from '../components/LayoutContainer';
-import { ErrorMessage } from '../components/Errors/ErrorMessage';
-import { NetworkError } from '../components/Errors/NetworkError';
-import { Loader } from '../components/Loader';
+import { LayoutContainer } from '../../components/LayoutContainer';
+import { ErrorMessage } from '../../components/Errors/ErrorMessage';
+import { NetworkError } from '../../components/Errors/NetworkError';
+import { Loader } from '../../components/Loader';
 import {
   Box,
   Button,

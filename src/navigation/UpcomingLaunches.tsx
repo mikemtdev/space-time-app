@@ -1,8 +1,8 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import { LaunchDetails } from '../screens/LaunchDetails';
-import { missionDetails } from '../screens/missionDetails';
-import { UpcomingLaunch } from '../screens/UpcomingLaunch';
+import { LaunchDetails } from '../screens/launch/LaunchDetails';
+import { missionDetails } from '../screens/vehicles/missionDetails';
+import { UpcomingLaunch } from '../screens/launch/UpcomingLaunch';
 
 const Stack = createNativeStackNavigator();
 export const UpcomingLaunchesStack = () => {
