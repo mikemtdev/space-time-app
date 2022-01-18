@@ -1,5 +1,11 @@
 import React from 'react';
-import { Box, Image, Pressable, Text } from 'native-base';
+import {
+  Box,
+  Center,
+  Image,
+  Pressable,
+  Text,
+} from 'native-base';
 import { useNavigation } from '@react-navigation/core';
 
 export const LaunchedCard = ({
@@ -18,6 +24,10 @@ export const LaunchedCard = ({
   mission_name: string;
 }) => {
   const navigation = useNavigation();
+  // console.log(
+  //   'launched:This is for ==> mission_id:',
+  //   mission_id
+  // );
   return (
     <Pressable
       borderWidth={0}
@@ -34,12 +44,15 @@ export const LaunchedCard = ({
         py={2}
         my={2}
         mx={3}>
-        <Image
-          w={100}
-          h={100}
-          source={{ uri: mission_patch }}
-          alt={rocket_name}
-        />
+        <Center>
+          <Image
+            w={100}
+            h={100}
+            resizeMode='contain'
+            source={{ uri: mission_patch }}
+            alt={rocket_name}
+          />
+        </Center>
         <Text fontSize='md' bold mb={1}>
           {rocket_name}
         </Text>

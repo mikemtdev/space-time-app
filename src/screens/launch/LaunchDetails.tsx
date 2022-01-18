@@ -7,8 +7,10 @@ import { Loader } from '../../components/Loader';
 import {
   Box,
   Button,
+  Center,
   Flex,
   HStack,
+  Image,
   ScrollView,
   Text,
 } from 'native-base';
@@ -23,6 +25,10 @@ export const LaunchDetails = (props) => {
     rocket {
       rocket_name
       rocket_type
+    }
+    links {
+      mission_patch_small
+      mission_patch
     }
     ships {
       active
@@ -52,11 +58,22 @@ export const LaunchDetails = (props) => {
     return <ErrorMessage error={error} />;
   }
   const navigation = useNavigation();
-  console.log('LaunchDetails:This is for ==> id:', id);
+  // console.log('LaunchDetails:This is for ==> id:', id);
   return (
     <LayoutContainer>
       <ScrollView>
         <Box mx='3'>
+          <Center>
+            {' '}
+            <Image
+              size='xl'
+              resizeMode='contain'
+              source={{
+                uri: data.launch.links.mission_patch,
+              }}
+              alt={data.launch.links.mission_name}
+            />
+          </Center>
           <HStack>
             <Text bold>Rocket Name: </Text>
             <Text mb='2'>

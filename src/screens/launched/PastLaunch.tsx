@@ -19,6 +19,8 @@ const LAUNCHED_QUERY = gql`
       links {
         article_link
         video_link
+        mission_patch
+        mission_patch_small
       }
       rocket {
         rocket_name
@@ -55,7 +57,7 @@ const LaunchedComponent = () => {
           rocket: { rocket_name },
           launch_site: { site_name_long },
           mission_name,
-          mission_patch,
+          links: { mission_patch, mission_patch_small },
         },
       }) => (
         <LaunchedCard
@@ -64,7 +66,7 @@ const LaunchedComponent = () => {
           rocket_name={rocket_name}
           site_name_long={site_name_long}
           mission_name={mission_name}
-          mission_patch={mission_patch}
+          mission_patch={mission_patch_small}
         />
       )}
       keyExtractor={(item) => item.id}

@@ -4,10 +4,10 @@ import {
 } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
-import { Launched } from '../screens/launched/PastLaunch';
-import { RocketsAndCapsules } from '../screens/vehicles/RocketsAndCapsules';
+import { RocketsAndCapsules } from '../screens/vehicles/Vehicles';
 import { LaunchedNavigation } from './LaunchedNavigation';
 import { UpcomingLaunchesStack } from './UpcomingLaunches';
+import VehiclesNavigations from './VehiclesNavigations';
 
 const Tab = createBottomTabNavigator();
 
@@ -47,11 +47,12 @@ export const MainTabs = () => {
         }}
       />
       <Tab.Screen
-        name='RocketsAndCapsules'
-        component={RocketsAndCapsules}
+        name='Vehicles'
+        component={VehiclesNavigations}
         options={{
-          tabBarLabel: 'Rockets & Capsules',
-          headerTitle: 'Rockets & Capsules',
+          tabBarLabel: 'Vehicles',
+          headerTitle: 'Vehicles',
+          headerShown: false,
           tabBarIcon: ({}) => (
             <TabIcon name='space-station' />
           ),

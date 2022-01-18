@@ -1,6 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { LaunchedDetails } from '../screens/launched/LaunchedDetails';
+import { missionDetails } from '../screens/launched/missionDetails';
 import { Launched } from '../screens/launched/PastLaunch';
 
 export const LaunchedNavigation = () => {
@@ -14,6 +15,10 @@ export const LaunchedNavigation = () => {
       <Stack.Screen
         name='LaunchedDetails'
         component={LaunchedDetails}
+      />
+      <Stack.Screen
+        name='launchedMissionDetails'
+        component={missionDetails}
       />
     </Stack.Navigator>
   );

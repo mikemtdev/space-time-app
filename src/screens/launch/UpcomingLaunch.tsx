@@ -71,9 +71,9 @@ const UpcomingLaunches = () => {
           id,
           rocket: { rocket_name },
           launch_site: { site_name_long },
+          links: { mission_patch },
           mission_name,
           mission_id,
-          mission_patch,
         },
       }) => (
         <Pressable
@@ -89,12 +89,14 @@ const UpcomingLaunches = () => {
               mission_id,
             })
           }>
-          <Image
-            w={100}
-            h={100}
-            source={{ uri: mission_patch }}
-            alt={rocket_name}
-          />
+          <Center>
+            <Image
+              size='xl'
+              resizeMode='contain'
+              source={{ uri: mission_patch }}
+              alt='mission_patch'
+            />
+          </Center>
           <Text fontSize='md' bold mb={1}>
             {rocket_name}
           </Text>
