@@ -1,5 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
+import { DragonsDetails } from '../screens/vehicles/DragonsDetails';
+import { RocketsDetails } from '../screens/vehicles/RocketsDetails';
 import { Vehicles } from '../screens/vehicles/Vehicles';
 
 const Stack = createNativeStackNavigator();
@@ -10,6 +12,14 @@ const VehiclesNavigations = () => {
         headerShadowVisible: false,
       }}>
       <Stack.Screen name='Vehicles' component={Vehicles} />
+      <Stack.Screen
+        name='RocketsDetails'
+        component={RocketsDetails}
+      />
+      <Stack.Screen
+        name='DragonsDetails'
+        component={DragonsDetails}
+      />
     </Stack.Navigator>
   );
 };

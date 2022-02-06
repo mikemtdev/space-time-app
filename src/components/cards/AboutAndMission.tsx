@@ -11,10 +11,6 @@ export const AboutAndMission = ({
   path: string;
   mission_id: string;
 }) => {
-  // console.log(
-  //   'AboutMission:This is for ==> mission_id:',
-  //   mission_id
-  // );
   const navigation = useNavigation();
   return (
     <Box>

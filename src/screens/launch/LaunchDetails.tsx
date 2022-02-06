@@ -35,7 +35,7 @@ export const LaunchDetails = (props) => {
       attempted_landings
       image
     }
-    mission_id
+
     launch_date_utc
     launch_site {
       site_name_long
@@ -48,6 +48,7 @@ export const LaunchDetails = (props) => {
 }`;
 
   const { data, loading, error } = useQuery(Query);
+
   if (loading) {
     return <Loader />;
   }

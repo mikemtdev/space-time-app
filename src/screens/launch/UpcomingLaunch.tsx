@@ -19,27 +19,26 @@ import { Loader } from '../../components/Loader';
 import { LayoutContainer } from '../../components/LayoutContainer';
 import { LaunchDetails } from './LaunchDetails';
 
-const UPCOMING_LAUNCHES = gql`
-  query {
-    launchesUpcoming(limit: 10) {
-      id
-      mission_name
-      mission_id
-      launch_site {
-        site_name_long
-      }
-      rocket {
-        rocket_name
-        rocket_type
-      }
-      links {
-        mission_patch
+const UpcomingLaunches = () => {
+  const UPCOMING_LAUNCHES = gql`
+    query {
+      launchNext {
+        id
+        mission_name
+        mission_id
+        launch_site {
+          site_name_long
+        }
+        rocket {
+          rocket_name
+          rocket_type
+        }
+        links {
+          mission_patch
+        }
       }
     }
-  }
-`;
-
-const UpcomingLaunches = () => {
+  `;
   const navigation = useNavigation();
   const { loading, error, data } = useQuery(
     UPCOMING_LAUNCHES
@@ -53,8 +52,9 @@ const UpcomingLaunches = () => {
     }
     return <ErrorMessage error={error} />;
   }
-  const { launchesUpcoming } = data;
-  console.log('App:This is for ==> data:', data);
+  const { launchNext } = data;
+  console.log('UpComLau:This is for ==> data:', data);
+  // console.log('App:This is for ==> data:', data);
   // return data.launchesUpcoming.map((launch, index) => (
   //   <Box key={index} shadow={8} py={3} mx={3}>
   //     <Text fontSize='md' bold mb={1}>
@@ -65,7 +65,7 @@ const UpcomingLaunches = () => {
   //   </Box>
   return (
     <FlatList
-      data={launchesUpcoming}
+      data={launchNext}
       renderItem={({
         item: {
           id,

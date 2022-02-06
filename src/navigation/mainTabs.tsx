@@ -47,11 +47,11 @@ export const MainTabs = () => {
         }}
       />
       <Tab.Screen
-        name='Vehicles'
+        name='VehiclesTab'
         component={VehiclesNavigations}
         options={{
           tabBarLabel: 'Vehicles',
-          headerTitle: 'Vehicles',
+
           headerShown: false,
           tabBarIcon: ({}) => (
             <TabIcon name='space-station' />

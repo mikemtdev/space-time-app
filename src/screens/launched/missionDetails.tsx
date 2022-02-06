@@ -1,37 +1,30 @@
-import { useQuery, gql } from '@apollo/client';
+import { gql, useQuery } from '@apollo/client';
+import { useNavigation } from '@react-navigation/core';
+import { Box, Link, ScrollView, Text } from 'native-base';
 import React from 'react';
-import { LayoutContainer } from '../../components/LayoutContainer';
 import { ErrorMessage } from '../../components/Errors/ErrorMessage';
 import { NetworkError } from '../../components/Errors/NetworkError';
+import { LayoutContainer } from '../../components/LayoutContainer';
 import { Loader } from '../../components/Loader';
-import {
-  Box,
-  Button,
-  Link,
-  ScrollView,
-  Text,
-} from 'native-base';
-import { useNavigation } from '@react-navigation/core';
 export const missionDetails = (props) => {
-  const { id, mission_id } = props.route.params;
+  const { mission_id } = props.route.params;
 
+  console.log(
+    'missionDetails:This is for ==> mission_id:',
+    params
+  );
   const Query = gql`
-    query {
-      mission(id: ${mission_id}) {
-        description
-        name
-        manufacturers
-        wikipedia
-        payloads {
-          customers
-          manufacturer
-          nationality
-          orbit
-          reused
-          payload_mass_kg
-        }
-      }
+  query {
+    mission(id: "${mission_id}") {
+    description
+    id
+    manufacturers
+    name
+    website
+    twitter 
+    wikipedia
     }
+  }
   `;
 
   const { data, loading, error } = useQuery(Query);
@@ -52,22 +45,17 @@ export const missionDetails = (props) => {
       manufacturers,
       description,
       wikipedia,
-      payloads,
     },
   } = data;
-  const objectPayload = Object.assign({}, payloads);
-  const {
-    customers,
-    manufacturer,
-    nationality,
-    orbit,
-    reused,
-    payload_mass_kg,
-  } = objectPayload;
-  // console.log(
-  //   'missionDetails:This is for ==> payloads:',
-  //   customers
-  // );
+  // const objectPayload = Object.assign({}, payloads);
+  // const {
+  //   customers,
+  //   manufacturer,
+  //   nationality,
+  //   orbit,
+  //   reused,
+  //   payload_mass_kg,
+  // } = objectPayload;
 
   return (
     <LayoutContainer>
@@ -76,14 +64,14 @@ export const missionDetails = (props) => {
           <Text mb='2'>Mission Name: {name}</Text>
           <Text mb='2'>Manufacturers: {manufacturers}</Text>
           <Text bold>Mission Payload :</Text>
-          <Text mb='2'>customers: {customers}</Text>
+          {/* <Text mb='2'>customers: {customers}</Text>
           <Text mb='2'>manufacturer: {manufacturer}</Text>
           <Text mb='2'>nationality: {nationality}</Text>
           <Text mb='2'>orbit: {orbit}</Text>
           <Text mb='2'>reused: {reused}</Text>
           <Text mb='2'>
             payload_mass_kg: {payload_mass_kg}
-          </Text>
+          </Text> */}
 
           <Text bold>
             wikipedia Link:

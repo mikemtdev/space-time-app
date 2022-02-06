@@ -44,7 +44,6 @@ export const missionDetails = (props) => {
     }
     return <ErrorMessage error={error} />;
   }
-  const navigation = useNavigation();
 
   const {
     mission: {
@@ -64,10 +63,6 @@ export const missionDetails = (props) => {
     reused,
     payload_mass_kg,
   } = objectPayload;
-  // console.log(
-  //   'missionDetails:This is for ==> payloads:',
-  //   customers
-  // );
 
   return (
     <LayoutContainer>
@@ -91,15 +86,6 @@ export const missionDetails = (props) => {
           </Text>
           <Text bold>About Mission :</Text>
           <Text>{description}</Text>
-
-          {/*
-          <Text mb='2'>
-            Rocket Type: {data.launch.rocket.rocket_type}
-          </Text>
-          <Text mb='2'>
-            Launch Year: {data.launch.launch_year}
-          </Text>
-          <Text mb='3'>{data.launch.details}</Text> */}
         </Box>
       </ScrollView>
     </LayoutContainer>

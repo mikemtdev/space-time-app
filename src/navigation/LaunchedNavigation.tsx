@@ -11,7 +11,10 @@ export const LaunchedNavigation = () => {
       screenOptions={{
         headerShadowVisible: false,
       }}>
-      <Stack.Screen name='Launched' component={Launched} />
+      <Stack.Screen
+        name='PastLaunches'
+        component={Launched}
+      />
       <Stack.Screen
         name='LaunchedDetails'
         component={LaunchedDetails}
