@@ -1,8 +1,9 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
 import { LaunchedDetails } from '../screens/launched/LaunchedDetails';
-import { missionDetails } from '../screens/launched/missionDetails';
+
 import { Launched } from '../screens/launched/PastLaunch';
+import MissionDetails from '../screens/shared/missionDetails';
 
 export const LaunchedNavigation = () => {
   const Stack = createNativeStackNavigator();
@@ -13,15 +14,24 @@ export const LaunchedNavigation = () => {
       }}>
       <Stack.Screen
         name='PastLaunches'
+        options={{
+          headerTitle: 'Past Launches',
+        }}
         component={Launched}
       />
       <Stack.Screen
         name='LaunchedDetails'
+        options={{
+          headerTitle: 'Launch Details',
+        }}
         component={LaunchedDetails}
       />
       <Stack.Screen
         name='launchedMissionDetails'
-        component={missionDetails}
+        options={{
+          headerTitle: 'Mission Details',
+        }}
+        component={MissionDetails}
       />
     </Stack.Navigator>
   );

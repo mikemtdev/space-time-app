@@ -59,7 +59,10 @@ export const LaunchDetails = (props) => {
     return <ErrorMessage error={error} />;
   }
   const navigation = useNavigation();
-  // console.log('LaunchDetails:This is for ==> id:', id);
+  console.log(
+    'LaunchDetails:This is for ==> mission_id:',
+    mission_id
+  );
   return (
     <LayoutContainer>
       <ScrollView>
@@ -72,18 +75,22 @@ export const LaunchDetails = (props) => {
               source={{
                 uri: data.launch.links.mission_patch,
               }}
-              alt={data.launch.links.mission_name}
+              alt={`${data.launch.links.mission_name}`}
             />
           </Center>
-          <HStack>
-            <Text bold>Rocket Name: </Text>
-            <Text mb='2'>
-              Mission Name: {data.launch.mission_name}
+          <HStack mt={4}>
+            <Text fontSize='lg' bold>
+              Mission Name:{' '}
+            </Text>
+            <Text fontSize='lg' mb='2'>
+              {data.launch.mission_name}
             </Text>
           </HStack>
           <HStack>
-            <Text bold>Rocket Name: </Text>
-            <Text mb='2'>
+            <Text fontSize='md' bold>
+              Rocket Name:{' '}
+            </Text>
+            <Text fontSize='md' mb='2'>
               {data.launch.rocket.rocket_name}
             </Text>
           </HStack>

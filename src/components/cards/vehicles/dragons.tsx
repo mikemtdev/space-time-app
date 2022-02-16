@@ -26,21 +26,13 @@ export const DragonsCard = ({
         py={2}
         my={2}
         mx={3}>
-        {/* <Image
-w={100}
-h={100}
-source={{ uri: mission_patch }}
-alt={rocket_name}
-/> */}
         <Text fontSize='lg' bold mb={1}>
           {name}
         </Text>
         <Text bold>Type: {type}</Text>
         <Text>Status: {status}</Text>
         <Text>Reuse count: {reuse_count}</Text>
-        {/* <Text>
-    Original Launch: {original_launch}
-  </Text> */}
+
         <Text>Landings: {landings}</Text>
       </Box>
     </Pressable>

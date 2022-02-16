@@ -3,6 +3,7 @@ import { useNavigation } from '@react-navigation/core';
 import {
   Box,
   Flex,
+  HStack,
   Link,
   ScrollView,
   Text,
@@ -73,30 +74,46 @@ export const DragonsDetails = (props) => {
     <LayoutContainer>
       <ScrollView>
         <Box mx='3'>
-          <Text mb='2' fontSize='lg' bold>
-            Name: {name}
-          </Text>
-          <Text fontSize='md' mb='1' bold>
-            Active: {active.toString()}
-          </Text>
+          <HStack mb='2'>
+            <Text mr='1' fontSize='lg' bold>
+              Name:
+            </Text>
+            <Text fontSize='lg'>{name}</Text>
+          </HStack>
+          <HStack mb='1'>
+            <Text fontSize='md' mr='1' bold>
+              Active:
+            </Text>
+            <Text fontSize='md'>{active.toString()}</Text>
+          </HStack>
 
-          <Text mb='1' bold>
-            Type: {type}
-          </Text>
-          <Text mb='1' bold>
-            Crew Capacity: {crew_capacity}
-          </Text>
-          <Text mb='1' bold>
-            {/* Stages: {stages} */}
-          </Text>
-          <Text mb='1' bold>
-            Diameter (Meters/Feet): {meters}/{feet}
-          </Text>
+          <HStack mb='1'>
+            <Text mr='1' bold>
+              Type:
+            </Text>
+            <Text>{type}</Text>
+          </HStack>
+          <HStack mb='1'>
+            <Text mr='1' bold>
+              Crew Capacity:
+            </Text>
+            <Text>{crew_capacity}</Text>
+          </HStack>
+          <HStack mb='1'>
+            <Text mr='1' bold>
+              Diameter (Meters/Feet):
+            </Text>
+            <Text>
+              {meters}/{feet}
+            </Text>
+          </HStack>
 
-          <Text mb={5} bold>
-            Learn more:
+          <HStack mb={5}>
+            <Text mr={1} bold>
+              Learn more:
+            </Text>
             <Link href={wikipedia}>wikipedia</Link>
-          </Text>
+          </HStack>
 
           <Box
             borderWidth={2}

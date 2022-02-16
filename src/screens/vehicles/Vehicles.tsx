@@ -1,59 +1,54 @@
-import { useQuery, gql } from '@apollo/client';
-import {
-  Box,
-  Button,
-  FlatList,
-  Flex,
-  Image,
-  Spinner,
-  Text,
-} from 'native-base';
-import React, { useEffect, useState } from 'react';
-import { ErrorMessage } from '../../components/Errors/ErrorMessage';
-import { LayoutContainer } from '../../components/LayoutContainer';
-import { Loader } from '../../components/Loader';
-import { NetworkError } from '../../components/Errors/NetworkError';
+import { gql, useQuery } from '@apollo/client';
+import { Button, FlatList, Flex, Text } from 'native-base';
+import React, { useState } from 'react';
 import { DragonsCard } from '../../components/cards/vehicles/dragons';
 import { RocketsCard } from '../../components/cards/vehicles/rockets';
-const CAPSULES = gql`
-  query {
-    capsules(find: {}) {
-      id
-      type
-      status
-      reuse_count
-      original_launch
-      missions {
-        flight
-        name
-      }
-      landings
-      dragon {
-        name
-        id
-      }
-    }
+import { ErrorMessage } from '../../components/Errors/ErrorMessage';
+import { NetworkError } from '../../components/Errors/NetworkError';
+import { LayoutContainer } from '../../components/LayoutContainer';
+import { Loader } from '../../components/Loader';
 
-    rockets {
-      id
-      name
-      type
-      active
-      description
-      cost_per_launch
-      height {
-        meters
-      }
-      engines {
+const RocketsAndCapsulesComponent = () => {
+  const [view, setView] = useState('dragons');
+
+  const CAPSULES = gql`
+    query {
+      capsules(find: {}) {
+        id
         type
-        version
+        status
+        reuse_count
+        original_launch
+        missions {
+          flight
+          name
+        }
+        landings
+        dragon {
+          name
+          id
+        }
+      }
+
+      rockets {
+        id
+        name
+        type
+        active
+        description
+        cost_per_launch
+        height {
+          meters
+        }
+        engines {
+          type
+          version
+        }
       }
     }
-  }
-`;
-const RocketsAndCapsulesComponent = () => {
+  `;
   const { loading, error, data } = useQuery(CAPSULES);
-  const [view, setView] = useState('dragons');
+
   if (loading) {
     return <Loader />;
   }

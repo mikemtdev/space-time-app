@@ -4,7 +4,6 @@ import {
 } from '@expo/vector-icons';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import React from 'react';
-import { RocketsAndCapsules } from '../screens/vehicles/Vehicles';
 import { LaunchedNavigation } from './LaunchedNavigation';
 import { UpcomingLaunchesStack } from './UpcomingLaunches';
 import VehiclesNavigations from './VehiclesNavigations';

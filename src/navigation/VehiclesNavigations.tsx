@@ -14,10 +14,16 @@ const VehiclesNavigations = () => {
       <Stack.Screen name='Vehicles' component={Vehicles} />
       <Stack.Screen
         name='RocketsDetails'
+        options={{
+          headerTitle: 'About Rocket',
+        }}
         component={RocketsDetails}
       />
       <Stack.Screen
         name='DragonsDetails'
+        options={{
+          headerTitle: 'About Dragon',
+        }}
         component={DragonsDetails}
       />
     </Stack.Navigator>

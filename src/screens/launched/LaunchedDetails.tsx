@@ -49,10 +49,10 @@ export const LaunchedDetails = (props) => {
   const { loading, error, data } = useQuery(
     fetchPastLaunches
   );
-  // console.log(
-  //   'LaunchedDetails:This is for ==> data:',
-  //   details
-  // );
+  console.log(
+    'LaunchedDetails:This is for ==> data:',
+    data
+  );
   if (loading) {
     return <Loader />;
   }
@@ -72,16 +72,12 @@ export const LaunchedDetails = (props) => {
       rocket: { rocket_name, rocket_type },
     },
   } = data;
-  // console.log(
-  //   'LaunchDetails:This is for ==> details:',
-  //   mission_patch
-  // );
+
   return (
     <LayoutContainer>
       <ScrollView>
         <Box mx={3}>
           <Center>
-            {' '}
             <Image
               w={100}
               h={100}
@@ -89,17 +85,18 @@ export const LaunchedDetails = (props) => {
               alt={mission_name}
             />
           </Center>
-          <HStack>
-            {/* <Text fontSize='lg'>Mission:</Text> */}
+          <HStack mt={4} mb={2}>
             <Text fontSize='lg' bold>
-              {mission_name}
+              Mission: {mission_name}
             </Text>
           </HStack>
-          <HStack>
-            <Text bold>Rocket_name: </Text>
-            <Text>{rocket_name}</Text>
+          <HStack mb={1}>
+            <Text fontSize='md' bold>
+              Rocket:{' '}
+            </Text>
+            <Text fontSize='md'>{rocket_name}</Text>
           </HStack>
-          <HStack>
+          <HStack mb={2}>
             <Text bold>Year: </Text>
             <Text>{launch_year}</Text>
           </HStack>

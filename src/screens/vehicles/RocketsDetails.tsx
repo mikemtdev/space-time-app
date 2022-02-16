@@ -8,6 +8,7 @@ import {
   Box,
   Button,
   Flex,
+  HStack,
   Link,
   ScrollView,
   Text,
@@ -86,30 +87,50 @@ export const RocketsDetails = (props) => {
     <LayoutContainer>
       <ScrollView>
         <Box mx='3'>
-          <Text mb='2' fontSize='lg' bold>
-            Name: {name}
-          </Text>
-          <Text fontSize='md' mb='1' bold>
-            By: {company}
-          </Text>
+          <HStack>
+            <Text mr={1} mb='2' fontSize='lg' bold>
+              Name:
+            </Text>
+            <Text mb='2' fontSize='lg'>
+              {name}
+            </Text>
+          </HStack>
+          <HStack>
+            <Text mr={1} fontSize='md' mb='1' bold>
+              By:
+            </Text>
+            <Text fontSize='md' mb='1'>
+              {company}
+            </Text>
+          </HStack>
 
-          <Text mb='1' bold>
-            Type: {type}
-          </Text>
-          <Text mb='1' bold>
-            Success Rate Pct: {success_rate_pct}
-          </Text>
-          <Text mb='1' bold>
-            Stages: {stages}
-          </Text>
-          <Text mb='1' bold>
-            Meters/Feet: {meters}/{feet}
-          </Text>
+          <HStack>
+            <Text mr='1' bold>
+              Success Rate Pct:
+            </Text>
 
-          <Text mb={5} bold>
-            Learn more:
+            <Text mb='1'>{success_rate_pct}</Text>
+          </HStack>
+          <HStack mb='1'>
+            <Text mr='1' bold>
+              Stages:
+            </Text>
+            <Text>{stages}</Text>
+          </HStack>
+          <HStack mb='1'>
+            <Text mr='1' bold>
+              Meters/Feet:
+            </Text>
+            <Text>
+              {meters}/{feet}
+            </Text>
+          </HStack>
+          <HStack mb={5}>
+            <Text mr={1} bold>
+              Learn more:
+            </Text>
             <Link href={wikipedia}>wikipedia</Link>
-          </Text>
+          </HStack>
 
           <Box
             borderWidth={2}
