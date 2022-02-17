@@ -1,23 +1,27 @@
 import { gql, useQuery } from '@apollo/client';
-import {
-  Box,
-  Center,
-  HStack,
-  Image,
-  ScrollView,
-  Text,
-} from 'native-base';
-import React from 'react';
+import { Box, Center, HStack, Image, ScrollView, Text } from 'native-base';
+import React, { FC } from 'react';
 import { AboutAndMission } from '../../components/cards/AboutAndMission';
 import { ErrorMessage } from '../../components/Errors/ErrorMessage';
 import { NetworkError } from '../../components/Errors/NetworkError';
 import { LayoutContainer } from '../../components/LayoutContainer';
 import { Loader } from '../../components/Loader';
 
-export const LaunchedDetails = (props) => {
-  const { id, mission_id } = props.route.params;
-  // console.log('LaunchedDetails:This is for ==> id:', id);
-  const fetchPastLaunches = gql`
+interface LaunchedDetailsProps {
+ route: route;
+}
+type route = {
+ params: params;
+};
+type params = {
+ id: string;
+ mission_id: string;
+};
+
+export const LaunchedDetails: FC<LaunchedDetailsProps> = (props) => {
+ const { id, mission_id } = props.route.params;
+ // console.log('LaunchedDetails:This is for ==> id:', id);
+ const fetchPastLaunches = gql`
   query {
     launch(id: ${id}) {
     id
@@ -46,68 +50,63 @@ export const LaunchedDetails = (props) => {
     launch_year
   }
       }`;
-  const { loading, error, data } = useQuery(
-    fetchPastLaunches
-  );
-  console.log(
-    'LaunchedDetails:This is for ==> data:',
-    data
-  );
-  if (loading) {
-    return <Loader />;
+ const { loading, error, data } = useQuery(fetchPastLaunches);
+ console.log('LaunchedDetails:This is for ==> data:', data);
+ if (loading) {
+  return <Loader />;
+ }
+ if (error) {
+  if (error.networkError) {
+   return <NetworkError />;
   }
-  if (error) {
-    if (error.networkError) {
-      return <NetworkError />;
-    }
-    return <ErrorMessage error={error} />;
-  }
-  const {
-    launch: {
-      mission_name,
-      details,
-      launch_year,
-      links: { mission_patch },
+  return <ErrorMessage error={error} />;
+ }
+ const {
+  launch: {
+   mission_name,
+   details,
+   launch_year,
+   links: { mission_patch },
 
-      rocket: { rocket_name, rocket_type },
-    },
-  } = data;
+   rocket: { rocket_name },
+  },
+ } = data;
 
-  return (
-    <LayoutContainer>
-      <ScrollView>
-        <Box mx={3}>
-          <Center>
-            <Image
-              w={100}
-              h={100}
-              source={{ uri: mission_patch }}
-              alt={mission_name}
-            />
-          </Center>
-          <HStack mt={4} mb={2}>
-            <Text fontSize='lg' bold>
-              Mission: {mission_name}
-            </Text>
-          </HStack>
-          <HStack mb={1}>
-            <Text fontSize='md' bold>
-              Rocket:{' '}
-            </Text>
-            <Text fontSize='md'>{rocket_name}</Text>
-          </HStack>
-          <HStack mb={2}>
-            <Text bold>Year: </Text>
-            <Text>{launch_year}</Text>
-          </HStack>
+ return (
+  <LayoutContainer>
+   <ScrollView>
+    <Box mx={3}>
+     <Center>
+      <Image
+       w={100}
+       h={100}
+       source={{ uri: mission_patch }}
+       alt={mission_name}
+      />
+     </Center>
+     <HStack mt={4} mb={2}>
+      <Text fontSize="lg" bold>
+       Mission: {mission_name}
+      </Text>
+     </HStack>
+     <HStack mb={1}>
+      <Text fontSize="md" bold>
+       Rocket:{' '}
+      </Text>
+      <Text fontSize="md">{rocket_name}</Text>
+     </HStack>
+     <HStack mb={2}>
+      <Text bold>Year: </Text>
+      <Text>{launch_year}</Text>
+     </HStack>
 
-          <AboutAndMission
-            path='pastedMissionDetails'
-            mission_id={mission_id}
-            details={details}
-          />
-        </Box>
-      </ScrollView>
-    </LayoutContainer>
-  );
+     <AboutAndMission
+      path="pastedMissionDetails"
+      mission_id={mission_id}
+      details={details}
+     />
+    </Box>
+   </ScrollView>
+  </LayoutContainer>
+ );
 };

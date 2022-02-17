@@ -1,10 +1,12 @@
 import { Box } from 'native-base';
-import React from 'react';
-
-export const LayoutContainer = (props) => {
-  return (
-    <Box flex={1} bgColor='white'>
-      {props.children}
-    </Box>
-  );
+import React, { FC } from 'react';
+interface LayoutContainerProps {
+ children: React.ReactNode;
+}
+export const LayoutContainer: FC<LayoutContainerProps> = ({ children }) => {
+ return (
+  <Box flex={1} bgColor="white">
+   {children}
+  </Box>
+ );
 };
