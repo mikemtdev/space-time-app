@@ -79,9 +79,8 @@ export const LaunchDetails: FC<LaunchedCardProps> = (props) => {
  return (
   <LayoutContainer>
    <ScrollView>
-    <Box mx="3">
+    <Box my={5} mx="3">
      <Center>
-      {' '}
       <Image
        size="xl"
        resizeMode="contain"
