@@ -1,20 +1,12 @@
-import { useQuery, gql } from '@apollo/client';
+import { useNavigation } from '@react-navigation/core';
+import { Box, Center, HStack, Image, ScrollView, Text } from 'native-base';
 import React, { FC } from 'react';
-import { LayoutContainer } from '../../components/LayoutContainer';
+import { AboutAndMission } from '../../components/cards/AboutAndMission';
 import { ErrorMessage } from '../../components/Errors/ErrorMessage';
 import { NetworkError } from '../../components/Errors/NetworkError';
+import { LayoutContainer } from '../../components/LayoutContainer';
 import { Loader } from '../../components/Loader';
-import {
- Box,
- Button,
- Center,
- Flex,
- HStack,
- Image,
- ScrollView,
- Text,
-} from 'native-base';
-import { useNavigation } from '@react-navigation/core';
+import getLaunches from '../../services/get-launches';
 
 interface LaunchedCardProps {
  route: route;
@@ -27,44 +19,17 @@ type params = {
  mission_id: string;
  mission_patch: string;
  rocket_name: string;
+
  site_name_long: string;
  mission_name: string;
 };
 
 export const LaunchDetails: FC<LaunchedCardProps> = (props) => {
  const { id, mission_id } = props.route.params;
- const navigation = useNavigation();
 
- const Query = gql`query{
- launch(id: ${id}) {
-    id
-    mission_name
-    rocket {
-      rocket_name
-      rocket_type
-    }
-    links {
-      mission_patch_small
-      mission_patch
-    }
-    ships {
-      active
-      attempted_landings
-      image
-    }
-
-    launch_date_utc
-    launch_site {
-      site_name_long
-    }
-    is_tentative
-    details
-    launch_year
-  }
-
-}`;
-
- const { data, loading, error } = useQuery(Query);
+ const { data, loading, error } = getLaunches.useGetUpComingLaunchesDetails({
+  id,
+ });
 
  if (loading) {
   return <Loader />;
@@ -75,7 +40,6 @@ export const LaunchDetails: FC<LaunchedCardProps> = (props) => {
   }
   return <ErrorMessage error={error} />;
  }
- console.log('LaunchDetails:This is for ==> mission_id:', mission_id);
  return (
   <LayoutContainer>
    <ScrollView>
@@ -114,26 +78,12 @@ export const LaunchDetails: FC<LaunchedCardProps> = (props) => {
       <Text bold>Launch Year: </Text>
       <Text mb="2">{data.launch.launch_year}</Text>
      </HStack>
-     <Box borderWidth={2} px={3} borderColor="warmGray.200" py={2} mb={2}>
-      <Box bgColor="warmGray.200" w="1/4" borderRadius="full" p={1}>
-       <Flex align="center">
-        <Text color="black" bold>
-         About
-        </Text>
-       </Flex>
-      </Box>
-      <Text mb="3">{data.launch.details}</Text>
-     </Box>
-     <Button
-      bgColor="black"
-      onPress={() =>
-       navigation.navigate('missionDetails', {
-        mission_id,
-       })
-      }
-     >
-      About mission
-     </Button>
+
+     <AboutAndMission
+      path="missionDetails"
+      mission_id={mission_id}
+      details={data.launch.details}
+     />
     </Box>
    </ScrollView>
   </LayoutContainer>

@@ -7,47 +7,12 @@ import { ErrorMessage } from '../../components/Errors/ErrorMessage';
 import { NetworkError } from '../../components/Errors/NetworkError';
 import { LayoutContainer } from '../../components/LayoutContainer';
 import { Loader } from '../../components/Loader';
+import getVehicles from '../../services/get-Vehicles';
 
 const RocketsAndCapsulesComponent = () => {
  const [view, setView] = useState('dragons');
 
- const CAPSULES = gql`
-  query {
-   capsules(find: {}) {
-    id
-    type
-    status
-    reuse_count
-    original_launch
-    missions {
-     flight
-     name
-    }
-    landings
-    dragon {
-     name
-     id
-    }
-   }
-
-   rockets {
-    id
-    name
-    type
-    active
-    description
-    cost_per_launch
-    height {
-     meters
-    }
-    engines {
-     type
-     version
-    }
-   }
-  }
- `;
- const { loading, error, data } = useQuery(CAPSULES);
+ const { loading, error, data } = getVehicles.useGetCapsules();
 
  if (loading) {
   return <Loader />;

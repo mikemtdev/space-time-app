@@ -1,10 +1,10 @@
-import { gql, useQuery } from '@apollo/client';
 import { Box, Flex, HStack, Link, ScrollView, Text } from 'native-base';
 import React, { FC } from 'react';
 import { ErrorMessage } from '../../components/Errors/ErrorMessage';
 import { NetworkError } from '../../components/Errors/NetworkError';
 import { LayoutContainer } from '../../components/LayoutContainer';
 import { Loader } from '../../components/Loader';
+import getVehicles from '../../services/get-Vehicles';
 interface DragonsDetailsProps {
  route: route;
 }
@@ -18,29 +18,7 @@ type params = {
 export const DragonsDetails: FC<DragonsDetailsProps> = (props) => {
  const { id } = props.route.params;
 
- const Query = gql`
-    query {
-        dragon(id: "${id}") {
-    description
-    active
-    crew_capacity
-    diameter {
-      meters
-      feet
-    }
-    id
-    type
-    wikipedia
-    name
-    thrusters {
-      type
-      amount
-    }
-  }
-  }
-  `;
-
- const { data, loading, error } = useQuery(Query);
+ const { data, loading, error } = getVehicles.useGetDragon({ id });
  if (loading) {
   return <Loader />;
  }

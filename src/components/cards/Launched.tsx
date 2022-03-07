@@ -18,10 +18,7 @@ export const LaunchedCard = ({
  mission_name: string;
 }) => {
  const navigation = useNavigation();
- // console.log(
- //   'launched:This is for ==> mission_id:',
- //   mission_id
- // );
+
  return (
   <Pressable
    borderWidth={0}

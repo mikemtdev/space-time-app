@@ -1,8 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import { LaunchedDetails } from '../screens/launched/LaunchedDetails';
-
 import { Launched } from '../screens/launched/PastLaunch';
+import { LaunchDetails } from '../screens/shared/LaunchDetails';
 import MissionDetails from '../screens/shared/missionDetails';
 
 export const LaunchedNavigation = () => {
@@ -25,7 +24,7 @@ export const LaunchedNavigation = () => {
     options={{
      headerTitle: 'Launch Details',
     }}
-    component={LaunchedDetails}
+    component={LaunchDetails}
    />
    <Stack.Screen
     name="launchedMissionDetails"

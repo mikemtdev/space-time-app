@@ -1,4 +1,3 @@
-import { gql, useQuery } from '@apollo/client';
 import { FlatList } from 'native-base';
 import React from 'react';
 import { LaunchedCard } from '../../components/cards/Launched';
@@ -6,32 +5,10 @@ import { ErrorMessage } from '../../components/Errors/ErrorMessage';
 import { NetworkError } from '../../components/Errors/NetworkError';
 import { LayoutContainer } from '../../components/LayoutContainer';
 import { Loader } from '../../components/Loader';
-
-const LAUNCHED_QUERY = gql`
- query {
-  launchesPast(limit: 20) {
-   id
-   mission_id
-   launch_date_local
-   launch_site {
-    site_name_long
-   }
-   links {
-    article_link
-    video_link
-    mission_patch
-    mission_patch_small
-   }
-   rocket {
-    rocket_name
-    rocket_type
-   }
-  }
- }
-`;
+import getLaunches from '../../services/get-launches';
 
 const LaunchedComponent = () => {
- const { loading, error, data } = useQuery(LAUNCHED_QUERY);
+ const { loading, error, data } = getLaunches.useGetPastLaunches();
 
  if (loading) {
   return <Loader />;
@@ -43,10 +20,7 @@ const LaunchedComponent = () => {
   return <ErrorMessage error={error} />;
  }
  const { launchesPast } = data;
- // console.log(
- //   'PastLaunch:This is for ==> data:',
- //   launchesPast
- // );
+
  return (
   <FlatList
    data={launchesPast}
@@ -57,7 +31,7 @@ const LaunchedComponent = () => {
      rocket: { rocket_name },
      launch_site: { site_name_long },
      mission_name,
-     links: { mission_patch, mission_patch_small },
+     links: { mission_patch_small },
     },
    }) => (
     <LaunchedCard

@@ -5,32 +5,15 @@ import { ErrorMessage } from '../../components/Errors/ErrorMessage';
 import { NetworkError } from '../../components/Errors/NetworkError';
 import { LayoutContainer } from '../../components/LayoutContainer';
 import { Loader } from '../../components/Loader';
+import getLaunches from '../../services/get-launches';
 
 interface renderProps {
  mission_id: string;
 }
 const Render: FC<renderProps> = ({ mission_id }) => {
- const getMission = gql`
-query {
-    mission(id: "${mission_id}") {
-    description
-    id
-    manufacturers
-    name
-    website
-    twitter 
-    wikipedia
-    payloads {
-      customers
-      reused
-      id
-      norad_id
-    }
-    }
-  }
-  `;
-
- const { loading, error, data } = useQuery(getMission);
+ const { loading, error, data } = getLaunches.useGetAboutMission({
+  mission_id,
+ });
 
  if (loading) {
   return <Loader />;
@@ -41,9 +24,8 @@ query {
   }
   return <ErrorMessage error={error} />;
  }
- console.log('LaunchedDetails:This is for ==> data:', data);
 
- const { name, manufacturers, wikipedia, description } = data.mission;
+ const { name, manufacturers, wikipedia, description } = data?.mission;
 
  return (
   <ScrollView my={4}>

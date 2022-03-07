@@ -1,10 +1,10 @@
-import { gql, useQuery } from '@apollo/client';
 import { Box, Flex, HStack, Link, ScrollView, Text } from 'native-base';
 import React, { FC } from 'react';
 import { ErrorMessage } from '../../components/Errors/ErrorMessage';
 import { NetworkError } from '../../components/Errors/NetworkError';
 import { LayoutContainer } from '../../components/LayoutContainer';
 import { Loader } from '../../components/Loader';
+import getVehicles from '../../services/get-Vehicles';
 
 interface RocketsDetailsProps {
  route: route;
@@ -17,44 +17,8 @@ type params = {
 };
 export const RocketsDetails: FC<RocketsDetailsProps> = (props) => {
  const { id } = props.route.params;
- console.log('RockDe:This is for ==> id:', id);
- const Query = gql`
-  query{
-    rocket(id: "${id}"){
-      wikipedia
-    type
-    success_rate_pct
-    stages
-    name
-    mass {
-      kg
-      lb
-    }
-    height {
-      feet
-      meters
-    }
-    first_flight
-    engines {
-      type
-    }
-    description
-    diameter {
-      feet
-      meters
-    }
-    active
-    cost_per_launch
-    country
-    company
-  }
-    
-  
-  }
-  
-  `;
 
- const { data, loading, error } = useQuery(Query);
+ const { data, loading, error } = getVehicles.useGetRocket({ id });
  if (loading) {
   return <Loader />;
  }

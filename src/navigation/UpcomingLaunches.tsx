@@ -1,7 +1,7 @@
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import React from 'react';
-import { LaunchDetails } from '../screens/launch/LaunchDetails';
 import { UpcomingLaunch } from '../screens/launch/UpcomingLaunch';
+import { LaunchDetails } from '../screens/shared/LaunchDetails';
 import MissionDetails from '../screens/shared/missionDetails';
 
 const Stack = createNativeStackNavigator();
