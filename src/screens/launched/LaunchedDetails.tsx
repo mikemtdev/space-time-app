@@ -20,38 +20,39 @@ type params = {
 
 export const LaunchedDetails: FC<LaunchedDetailsProps> = (props) => {
  const { id, mission_id } = props.route.params;
- // console.log('LaunchedDetails:This is for ==> id:', id);
  const fetchPastLaunches = gql`
-  query {
-    launch(id: ${id}) {
+  query PastLaunch($id: ID!) {
+   launch(id: $id) {
     id
     mission_name
     details
     rocket {
-      rocket_name
-      rocket_type
+     rocket_name
+     rocket_type
     }
     links {
-      mission_patch_small
-      mission_patch
+     mission_patch_small
+     mission_patch
     }
     ships {
-      active
-      attempted_landings
-      image
+     active
+     attempted_landings
+     image
     }
-    
+
     launch_date_utc
     launch_site {
-      site_name_long
+     site_name_long
     }
     is_tentative
     details
-    launch_year
+    launch_date_utc
+   }
   }
-      }`;
- const { loading, error, data } = useQuery(fetchPastLaunches);
- console.log('LaunchedDetails:This is for ==> data:', data);
+ `;
+ const { loading, error, data } = useQuery(fetchPastLaunches, {
+  variables: { id: id },
+ });
  if (loading) {
   return <Loader />;
  }
@@ -65,12 +66,13 @@ export const LaunchedDetails: FC<LaunchedDetailsProps> = (props) => {
   launch: {
    mission_name,
    details,
-   launch_year,
+   launch_date_utc,
    links: { mission_patch },
 
    rocket: { rocket_name },
   },
  } = data;
+ const year = new Date(launch_date_utc).getFullYear();
 
  return (
   <LayoutContainer>
@@ -80,7 +82,9 @@ export const LaunchedDetails: FC<LaunchedDetailsProps> = (props) => {
       <Image
        w={100}
        h={100}
-       source={{ uri: mission_patch }}
+       source={{
+        uri: 'https://e7.pngegg.com/pngimages/205/39/png-clipart-spacex-crs-3-international-space-station-spacex-crs-1-spacex-crs-2-spacex-dragon-nasa-miscellaneous-falcon.png',
+       }}
        alt={mission_name}
       />
      </Center>
@@ -97,7 +101,7 @@ export const LaunchedDetails: FC<LaunchedDetailsProps> = (props) => {
      </HStack>
      <HStack mb={2}>
       <Text bold>Year: </Text>
-      <Text>{launch_year}</Text>
+      <Text>{year}</Text>
      </HStack>
 
      <AboutAndMission

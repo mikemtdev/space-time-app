@@ -1,1 +1,1 @@
-export const URI = 'https://api.spacex.land/graphql/';
+export const URI = 'https://spacex-production.up.railway.app/';

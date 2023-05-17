@@ -6,26 +6,15 @@ interface DragonsCardProps {
  item: Item;
 }
 type Item = {
- dragon: Dragon;
- type: string;
- status: string;
- reuse_count: string;
- landings: string;
-};
-
-type Dragon = {
  id: string;
  name: string;
+ active: boolean;
+ crew_capacity: number;
+ description: string;
 };
 
 export const DragonsCard: FC<DragonsCardProps> = ({
- item: {
-  type,
-  status,
-  reuse_count,
-  landings,
-  dragon: { name, id },
- },
+ item: { name, active, crew_capacity, description, id },
 }) => {
  const navigation = useNavigation();
  return (
@@ -38,11 +27,10 @@ export const DragonsCard: FC<DragonsCardProps> = ({
     <Text fontSize="lg" bold mb={1}>
      {name}
     </Text>
-    <Text bold>Type: {type}</Text>
-    <Text>Status: {status}</Text>
-    <Text>Reuse count: {reuse_count}</Text>
 
-    <Text>Landings: {landings}</Text>
+    <Text>Crew Capacity: {crew_capacity}</Text>
+
+    <Text>Status: {active && 'Active'}</Text>
    </Box>
   </Pressable>
  );

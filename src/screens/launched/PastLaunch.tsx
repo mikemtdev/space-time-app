@@ -26,6 +26,7 @@ const LAUNCHED_QUERY = gql`
     rocket_name
     rocket_type
    }
+   launch_date_utc
   }
  }
 `;
@@ -43,10 +44,7 @@ const LaunchedComponent = () => {
   return <ErrorMessage error={error} />;
  }
  const { launchesPast } = data;
- // console.log(
- //   'PastLaunch:This is for ==> data:',
- //   launchesPast
- // );
+
  return (
   <FlatList
    data={launchesPast}
@@ -55,7 +53,8 @@ const LaunchedComponent = () => {
      id,
      mission_id,
      rocket: { rocket_name },
-     launch_site: { site_name_long },
+     //  launch_site: { site_name_long },
+     launch_date_utc,
      mission_name,
      links: { mission_patch, mission_patch_small },
     },
@@ -63,8 +62,8 @@ const LaunchedComponent = () => {
     <LaunchedCard
      id={id}
      mission_id={mission_id}
+     launch_date_utc={launch_date_utc}
      rocket_name={rocket_name}
-     site_name_long={site_name_long}
      mission_name={mission_name}
      mission_patch={mission_patch_small}
     />

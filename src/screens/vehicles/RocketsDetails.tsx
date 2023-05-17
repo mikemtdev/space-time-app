@@ -17,7 +17,6 @@ type params = {
 };
 export const RocketsDetails: FC<RocketsDetailsProps> = (props) => {
  const { id } = props.route.params;
- console.log('RockDe:This is for ==> id:', id);
  const Query = gql`
   query{
     rocket(id: "${id}"){
@@ -48,10 +47,10 @@ export const RocketsDetails: FC<RocketsDetailsProps> = (props) => {
     country
     company
   }
-    
-  
+
+
   }
-  
+
   `;
 
  const { data, loading, error } = useQuery(Query);

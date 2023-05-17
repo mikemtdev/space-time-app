@@ -7,6 +7,7 @@ import { ErrorMessage } from '../../components/Errors/ErrorMessage';
 import { NetworkError } from '../../components/Errors/NetworkError';
 import { LayoutContainer } from '../../components/LayoutContainer';
 import { Loader } from '../../components/Loader';
+import { CapsulesCard } from '../../components/cards/vehicles/capsules';
 
 const RocketsAndCapsulesComponent = () => {
  const [view, setView] = useState('dragons');
@@ -15,21 +16,19 @@ const RocketsAndCapsulesComponent = () => {
   query {
    capsules(find: {}) {
     id
-    type
-    status
-    reuse_count
-    original_launch
-    missions {
-     flight
-     name
-    }
     landings
-    dragon {
-     name
-     id
-    }
-   }
 
+    original_launch
+    reuse_count
+    status
+    type
+   }
+   dragons {
+    name
+    id
+    active
+    crew_capacity
+   }
    rockets {
     id
     name
@@ -40,9 +39,9 @@ const RocketsAndCapsulesComponent = () => {
     height {
      meters
     }
+
     engines {
      type
-     version
     }
    }
   }
@@ -58,14 +57,19 @@ const RocketsAndCapsulesComponent = () => {
   }
   return <ErrorMessage error={error} />;
  }
- const { capsules, rockets } = data;
+ const { capsules, rockets, dragons } = data;
 
  return (
   <>
    <Flex py={2} direction="row" justifyContent="space-around">
-    <Text bold color="indigo.600" bgColor="indigo.500" px={23}>
-     {view.toLocaleUpperCase()}
-    </Text>
+    <Button
+     bgColor={view === 'capsules' ? 'indigo.500' : 'indigo.400'}
+     onPress={() => {
+      view !== 'capsules' ? setView('capsules') : null;
+     }}
+    >
+     Capsules
+    </Button>
     <Button
      bgColor={view === 'dragons' ? 'indigo.500' : 'indigo.400'}
      onPress={() => {
@@ -83,9 +87,18 @@ const RocketsAndCapsulesComponent = () => {
      Rockets
     </Button>
    </Flex>
-   {view === 'dragons' ? (
+   <Text bold color="indigo.600" bgColor="indigo.500" px={23}>
+    {view.toLocaleUpperCase()}
+   </Text>
+   {view === 'capsules' ? (
     <FlatList
      data={capsules}
+     renderItem={({ item }) => <CapsulesCard item={item} />}
+     keyExtractor={(item) => item.id}
+    />
+   ) : view === 'dragons' ? (
+    <FlatList
+     data={dragons}
      renderItem={({ item }) => <DragonsCard item={item} />}
      keyExtractor={(item) => item.id}
     />

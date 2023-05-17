@@ -10,7 +10,6 @@ export const AboutAndMission: FC<AboutAndMissionProps> = ({
  details,
  mission_id,
 }) => {
- console.log('AboutAndMission:This is for ==> mission_id:', mission_id);
  const navigation = useNavigation();
  return (
   <Box>
